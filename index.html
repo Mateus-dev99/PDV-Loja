@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDV Loja</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header>
+        <h1>PDV Loja - Anderson</h1>
+        <p>Sistema de vendas e controle de produtos</p>
+    </header>
+    <main>
+        <section id="produtos">
+            <h2>Produtos</h2>
+
+        <label for="busca">Buscar produto:</label>
+        <input
+        type="search"
+        id="busca"
+        placeholder="Nome ou código de barras"
+        >
+    <button type="button">Buscar</button>
+    <div id="resultado-busca"></div>
+    
+
+        </section>
+        <section id="carrinho">
+        <h2>Carrinho de vendas</h2>
+
+        <div id="itens-carrinho">
+            <p>Nenhum produto adicionado.</p>
+        </div>
+        
+        <p>Total: <span id="total">R$ 0,00</span></p>
+
+        <button type="button">Finalizar venda</button>
+    </section>
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
