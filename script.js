@@ -81,6 +81,20 @@ function adicionarAoCarrinho(id) {
     mostrarCarrinho();
 }
 
+// ==== Remover produtos do carrinho ====
+function removerDoCarrinho(id) {
+    // Encontra a posição (índice) do produto no array do carrinho
+    const indice = carrinho.findIndex(function (p) {
+        return p.id === id;
+    });
+
+    // Se achou o produto (índice maior ou igual a 0)
+    if (indice >= 0) {
+        carrinho.splice(indice, 1); // Remove 1 item a partir daquela posição
+        mostrarCarrinho(); // Atualiza a tela
+    }
+}
+
 // ==== Mostrar o carrinho na tela ====
 function mostrarCarrinho() {
     const divItens = document.getElementById("itens-carrinho");
@@ -94,7 +108,10 @@ function mostrarCarrinho() {
 
     let html = "<ul>";
     carrinho.forEach(function (produto) {
-        html += `<li>${produto.nome} - R$ ${produto.preco.toFixed(2)}</li>`;
+        html += `<li>
+            ${produto.nome} - R$ ${produto.preco.toFixed(2)}
+            <button onclick="removerDoCarrinho(${produto.id})">Remover</button>
+        </li>`;
     });
     html += "</ul>";
 
