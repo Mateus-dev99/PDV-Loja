@@ -79,6 +79,7 @@ function adicionarAoCarrinho(id) {
 
     carrinho.push(produto);
     mostrarCarrinho();
+    localStorage.setItem("meuCarrinho", JSON.stringify(carrinho)); // <-- ADICIONE AQUI
 }
 
 // ==== Remover produtos do carrinho ====
@@ -92,6 +93,7 @@ function removerDoCarrinho(id) {
     if (indice >= 0) {
         carrinho.splice(indice, 1); // Remove 1 item a partir daquela posição
         mostrarCarrinho(); // Atualiza a tela
+        localStorage.setItem("meuCarrinho", JSON.stringify(carrinho)); // <-- ADICIONE AQUI
     }
 }
 
@@ -142,6 +144,7 @@ function finalizarVenda() {
 
     // 4. Limpa o carrinho
     carrinho.length = 0; // 0 length = 0 apaga tudo que tem dentro do array!
+    localStorage.setItem("meuCarrinho", JSON.stringify(carrinho)); // <-- ADICIONE AQUI
 
     // 5. Atualiza a tela
     mostrarCarrinho();
@@ -153,5 +156,11 @@ function finalizarVenda() {
 botaoBuscar.addEventListener("click", buscarProdutos);
 botaoFinalizar.addEventListener("click", finalizarVenda);
 
+// ==== Carregar carrinho salvo ====
+const carrinhoSalvo = localStorage.getItem("meuCarrinho");
 
+if (carrinhoSalvo) {
+    carrinho.push(...JSON.parse(carrinhoSalvo));
+    mostrarCarrinho();
+}
 
