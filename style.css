@@ -47,3 +47,15 @@ section {
 #carrinho {
     flex: 1;
 }
+
+/* ==== Acessibilidade: Foco visível apenas para teclado ==== */
+button:focus-visible, input:focus-visible {
+    outline: 3px solid #f39c12; /* Uma borda laranja bem visível */
+    outline-offset: 2px;
+}
+
+/* Remove a borda preta padrão do navegador ao clicar com o mouse */
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible) {
+    outline: none;
+}

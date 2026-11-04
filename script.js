@@ -156,6 +156,13 @@ function finalizarVenda() {
 botaoBuscar.addEventListener("click", buscarProdutos);
 botaoFinalizar.addEventListener("click", finalizarVenda);
 
+// ==== Acessibilidade: Buscar ao apertar Enter ====
+campoBusca.addEventListener("keypress", function(evento) {
+    if (evento.key === "Enter") {
+        buscarProdutos();
+    }
+});
+
 // ==== Carregar carrinho salvo ====
 const carrinhoSalvo = localStorage.getItem("meuCarrinho");
 
@@ -164,3 +171,32 @@ if (carrinhoSalvo) {
     mostrarCarrinho();
 }
 
+// ==== API de Clima (Open-Meteo) ====
+function buscarClima() {
+    const spanClima = document.getElementById("info-clima");
+
+    // Coordenadas de São Paulo (Latitude, Longitude)
+    const lat = -23.55;
+    const lon = -46.63;
+    
+    // URL da API (pedindo temperatura atual)
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+    // O fetch vai na internet buscar os dados
+    fetch(url)
+        .then(function (resposta) {
+            return resposta.json(); // Transforma a resposta em objeto JS
+        })
+        .then(function (dados) {
+            // Pega a temperatura que veio da API
+            const temperatura = dados.current_weather.temperature;
+            spanClima.textContent = `Clima em SP: ${temperatura}°C`;
+        })
+        .catch(function (erro) {
+            spanClima.textContent = "Clima indisponível";
+            console.log("Erro ao buscar clima:", erro);
+        });
+        
+}
+// Chama a funcção assim que o sistema carrega
+buscarClima();
